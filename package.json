@@ -1,5 +1,5 @@
 {
-  "name": "blog-koa-api",
+  "name": "wordpress-koa-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,5 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.5.1",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "mysql": "^2.15.0"
+  }
 }
