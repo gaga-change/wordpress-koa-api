@@ -1,8 +1,7 @@
 const router = require('koa-router')()
-const tag = require('./tag')
+const terms = require('./terms')
 
-router.get('/', async (ctx) => {
-    ctx.body = 'WordPress Koa Api'
-}).get('/tags', tag.getAll)
+router.get('/tags', terms.getTags)
+    .get('/category', terms.getCategory)
 
 module.exports = router

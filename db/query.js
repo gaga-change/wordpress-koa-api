@@ -14,12 +14,12 @@ module.exports = (sql, values) => {
                 reject(err)
             } else {
                 connection.query(sql, values, (err, rows) => {
+                    connection.release()
                     if (err) {
                         reject(err)
                     } else {
                         resolve(rows)
                     }
-                    connection.release()
                 })
             }
         })
