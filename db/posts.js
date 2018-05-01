@@ -17,7 +17,7 @@ exports.queryPosts = () => {
  * @param {String} idArr ID集合
  */
 exports.queryPostsByID = (idArr) => {
-    return query(`SELECT wp_posts.*
+    return query(`SELECT ID,post_author,post_date,post_content,post_title
     FROM wp_posts
     WHERE ID IN (?)`, [idArr])
 }
