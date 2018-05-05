@@ -13,3 +13,8 @@ exports.getTags = () => {
 exports.getCategory = () => {
     return terms.queryCategory()
 }
+
+/** 获取文章的标签以及分类目录 */
+exports.getPostsTerms = (idArr) => {
+    return terms.getPostsTerms(idArr)
+}
