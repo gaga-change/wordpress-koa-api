@@ -1,8 +1,8 @@
 const posts = require('../db/posts')
 
 /** 获取文章列表 */
-exports.getPosts = () => {
-    return posts.queryPosts()
+exports.getPosts = (start, length) => {
+    return posts.queryPosts(start, length)
 }
 
 /** 获取总数 */

@@ -3,7 +3,13 @@ const terms = require('../control/terms')
 
 /** 获取文章列表 */
 exports.getPosts = async (ctx) => {
-    let ret = await posts.getPosts()
+    let page = parseInt(ctx.query.page) || 1
+    let pageSize = parseInt(ctx.query.pageSize) || 12
+    page = Math.abs(page)
+    pageSize = Math.abs(pageSize)
+    if (pageSize > 30) pageSize = 29
+
+    let ret = await posts.getPosts(pageSize * (page - 1), pageSize)
     // 搜索总条数
     let rows = await posts.findRows()
     rows = rows[0] || { count: 0 }
@@ -27,8 +33,11 @@ exports.getPosts = async (ctx) => {
     }
     ctx.body = {
         data: {
-            list: data,
-            ...rows
+            ...rows,
+            page,
+            pageSize,
+            pages:Math.ceil(rows.count / pageSize),
+            list: data
         }
     }
 }
