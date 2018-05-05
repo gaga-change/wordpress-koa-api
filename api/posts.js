@@ -3,6 +3,9 @@ const terms = require('../control/terms')
 /** 获取文章列表 */
 exports.getPosts = async (ctx) => {
     let ret = await posts.getPosts()
+    // 搜索总条数
+    let rows = await posts.findRows()
+    rows = rows[0] || { count: 0 }
     let idArr = []
     ret.forEach(item => idArr.push(item.ID))
     ret = await Promise.all([posts.getDetailById(idArr), terms.getPostsTerms(idArr)])
@@ -22,7 +25,10 @@ exports.getPosts = async (ctx) => {
         data.push(obj[key])
     }
     ctx.body = {
-        data
+        data: {
+            list: data,
+            ...rows
+        }
     }
 }
 

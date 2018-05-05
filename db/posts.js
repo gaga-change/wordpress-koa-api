@@ -12,6 +12,10 @@ exports.queryPosts = () => {
     LIMIT 0, 10`)
 }
 
+/** 获取查询总数 */
+exports.findRows = () => {
+    return query(`SELECT FOUND_ROWS() as count`)
+}
 /**
  * 根据ID获取文章详情
  * @param {String} idArr ID集合

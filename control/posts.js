@@ -5,6 +5,11 @@ exports.getPosts = () => {
     return posts.queryPosts()
 }
 
+/** 获取总数 */
+exports.findRows = () => {
+    return posts.findRows()
+}
+
 /**
  * 根据ID获取文章详情
  * @param {Array} idArr ID集合
