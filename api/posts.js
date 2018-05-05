@@ -15,3 +15,11 @@ exports.getPosts = async (ctx) => {
         data: ret
     }
 }
+
+/** 获取最新文章 */
+exports.getNewPosts = async (ctx) => {
+    let ret = await posts.getNewPosts()
+    ctx.body = {
+        ret
+    }
+}

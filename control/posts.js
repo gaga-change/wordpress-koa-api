@@ -12,3 +12,8 @@ exports.getPosts = () => {
 exports.getDetailById = (idArr) => {
     return posts.queryPostsByID(idArr)
 }
+
+/** 获取最新文章 */
+exports.getNewPosts = () => {
+    return posts.getNewPosts()
+}

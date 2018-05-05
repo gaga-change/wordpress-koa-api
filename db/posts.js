@@ -21,3 +21,14 @@ exports.queryPostsByID = (idArr) => {
     FROM wp_posts
     WHERE ID IN (?)`, [idArr])
 }
+
+/** 获取最新5篇文章 */
+exports.getNewPosts = () => {
+    return query(`SELECT wp_posts.ID,wp_posts.post_title
+    FROM wp_posts 
+    WHERE 1=1 
+    AND wp_posts.post_type = 'post'
+    AND ((wp_posts.post_status = 'publish')) 
+    ORDER BY wp_posts.post_date DESC
+    LIMIT 0, 5`)
+}
