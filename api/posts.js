@@ -1,5 +1,6 @@
 const posts = require('../control/posts')
 const terms = require('../control/terms')
+
 /** 获取文章列表 */
 exports.getPosts = async (ctx) => {
     let ret = await posts.getPosts()
@@ -18,7 +19,7 @@ exports.getPosts = async (ctx) => {
     })
     // 分类目录&标签
     ret[1].forEach(item => {
-        obj[item.object_id] = {...obj[item.object_id], ...item}
+        obj[item.object_id] = { ...obj[item.object_id], ...item }
     })
     let data = []
     for (let key in obj) {
@@ -37,5 +38,17 @@ exports.getNewPosts = async (ctx) => {
     let ret = await posts.getNewPosts()
     ctx.body = {
         ret
+    }
+}
+
+/** 根据ID获取指定详情 */
+exports.getPost = async (ctx, next) => {
+    let postId = ctx.query.postId
+    if (!postId) { // 参数校验
+        return next()
+    }
+    let post = await posts.queryPostByID(postId)
+    ctx.body = {
+        data: post[0]
     }
 }
