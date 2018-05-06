@@ -31,6 +31,6 @@ exports.getPostsTerms = (idArr) => {
     INNER JOIN wp_term_relationships AS tr
     ON tr.term_taxonomy_id = tt.term_taxonomy_id
     WHERE tt.taxonomy IN ('category', 'post_tag', 'post_format')
-    AND tr.object_id IN (3, 150, 152, 156, 228, 240, 244, 249, 266, 326)
+    AND tr.object_id IN (?)
     ORDER BY t.name ASC`, [idArr])
 }

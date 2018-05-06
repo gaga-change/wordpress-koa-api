@@ -2,7 +2,6 @@ const query = require('./query')
 
 /** 获取文章列表 */
 exports.queryPosts = (start, length) => {
-    console.log(start, length)
     return query(`SELECT SQL_CALC_FOUND_ROWS wp_posts.ID
     FROM wp_posts 
     WHERE 1=1 
@@ -10,12 +9,17 @@ exports.queryPosts = (start, length) => {
     AND (wp_posts.post_status = 'publish'
     OR wp_posts.post_status = 'private') 
     ORDER BY wp_posts.post_date DESC
-    LIMIT ?, ?`, [0, 10])
+    LIMIT ?, ?`, [start, length])
 }
 
 /** 获取查询总数 */
 exports.findRows = () => {
-    return query(`SELECT FOUND_ROWS() as count`)
+    return query(`SELECT COUNT(*) as count
+    FROM wp_posts 
+    WHERE 1=1 
+    AND wp_posts.post_type = 'post'
+    AND (wp_posts.post_status = 'publish'
+    OR wp_posts.post_status = 'private')` )
 }
 
 /**

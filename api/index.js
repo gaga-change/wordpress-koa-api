@@ -12,4 +12,11 @@ router
     .get('/post', posts.getPost) // 获取指定文章
     .get('/posts/getArchives', posts.getArchives) // 按月归档
 
+    /**
+     * 剩余需要接口
+     *  搜索接口
+     *  按标签搜索接口
+     *  按分类目录搜索接口
+     *  获取banner图片接口
+     */
 module.exports = router
