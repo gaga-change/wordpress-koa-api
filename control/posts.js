@@ -27,3 +27,8 @@ exports.queryPostByID = (id) => {
 exports.getNewPosts = () => {
     return posts.getNewPosts()
 }
+
+/** 按月份归档 */
+exports.getArchives = () => {
+    return posts.getArchives()
+}

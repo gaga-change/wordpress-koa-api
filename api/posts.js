@@ -36,7 +36,7 @@ exports.getPosts = async (ctx) => {
             ...rows,
             page,
             pageSize,
-            pages:Math.ceil(rows.count / pageSize),
+            pages: Math.ceil(rows.count / pageSize),
             list: data
         }
     }
@@ -59,5 +59,13 @@ exports.getPost = async (ctx, next) => {
     let post = await posts.queryPostByID(postId)
     ctx.body = {
         data: post[0]
+    }
+}
+
+/** 按月份归档 */
+exports.getArchives = async (ctx) => {
+    let ret = await posts.getArchives()
+    ctx.body = {
+        data: ret
     }
 }

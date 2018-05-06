@@ -48,3 +48,13 @@ exports.getNewPosts = () => {
     ORDER BY wp_posts.post_date DESC
     LIMIT 0, 5`)
 }
+
+/** 按月份归档 */
+exports.getArchives = () => {
+    return query(`	SELECT YEAR(post_date) AS 'year', MONTH(post_date) AS 'month', count(ID) as posts
+    FROM wp_posts 
+    WHERE post_type = 'post'
+    AND post_status = 'publish'
+    GROUP BY YEAR(post_date), MONTH(post_date)
+    ORDER BY post_date DESC`)
+}
