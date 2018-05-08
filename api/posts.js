@@ -3,20 +3,9 @@ const terms = require('../control/terms')
 
 /** 获取文章列表 */
 exports.getPosts = async (ctx) => {
-    console.log('....')
-    // 处理 page&pageSize两个参数：默认值、取整、最大值
-    let page = ctx._page
-    let pageSize = ctx._pageSize
-    let ret = await posts.getPosts(pageSize * (page - 1), pageSize)
-
+    let ret = await posts.getPosts(ctx._start, ctx._length)
     ctx.body = {
-        data: {
-            ...ret.rows,
-            page,
-            pageSize,
-            pages: Math.ceil(ret.rows.count / pageSize),
-            list: ret.postArr
-        }
+        ...ret
     }
 }
 
@@ -52,7 +41,7 @@ exports.getArchives = async (ctx) => {
 exports.search = async (ctx, next) => {
     let search = ctx.query.search
     if (!search) return next()
-    let ret = await posts.search(search)
+    let ret = await posts.search(ctx._start, ctx._length, search)
     ctx.body = {
         ...ret
     }

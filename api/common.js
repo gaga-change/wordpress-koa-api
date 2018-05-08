@@ -7,7 +7,9 @@ exports.page = async (ctx, next) => {
     page = Math.abs(page)
     pageSize = Math.abs(pageSize)
     if (pageSize > 30) pageSize = 29
-    ctx._page = page
-    ctx._pageSize = pageSize
+    ctx._start = pageSize * (page - 1)
+    ctx._length = pageSize
     await next()
+    ctx.body.page = page
+    ctx.body.pageSize = pageSize
 }

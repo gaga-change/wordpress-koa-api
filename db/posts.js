@@ -53,7 +53,7 @@ exports.getArchives = () => {
 }
 
 /** 模糊搜索 */
-exports.search = (search) => {
+exports.search = (start, length, search) => {
     search = '%' + search + '%'
     return query(`SELECT SQL_CALC_FOUND_ROWS wp_posts.ID
     FROM wp_posts 
@@ -66,5 +66,5 @@ exports.search = (search) => {
     OR wp_posts.post_author = 1
     AND wp_posts.post_status = 'private') 
     ORDER BY wp_posts.post_title LIKE ? DESC, wp_posts.post_date DESC
-    LIMIT 0, 10; SELECT FOUND_ROWS() as count`, [search, search, search, search])
+    LIMIT ?, ?; SELECT FOUND_ROWS() as count`, [search, search, search, search, start, length])
 }

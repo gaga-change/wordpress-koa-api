@@ -9,8 +9,8 @@ exports.getPosts = async (start, length) => {
 }
 
 /** 模糊搜索 */
-exports.search = async (search) => {
-    let ret = await posts.search(search)
+exports.search = async (start, length, search) => {
+    let ret = await posts.search(start, length, search)
     return listDetail(ret[0], ret[1])
 }
 
@@ -63,7 +63,7 @@ async function listDetail(idObjArr, rowsArr) {
         postArr.push(obj[key])
     }
     return Promise.resolve({
-        rows,
-        postArr
+        count: rows.count,
+        data: postArr
     })
 }
