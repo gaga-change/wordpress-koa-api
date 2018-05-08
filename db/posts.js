@@ -62,9 +62,7 @@ exports.search = (start, length, search) => {
     OR (wp_posts.post_excerpt LIKE ?)
     OR (wp_posts.post_content LIKE ?))) 
     AND wp_posts.post_type IN ('post', 'page', 'attachment')
-    AND (wp_posts.post_status = 'publish'
-    OR wp_posts.post_author = 1
-    AND wp_posts.post_status = 'private') 
+    AND wp_posts.post_status = 'publish'
     ORDER BY wp_posts.post_title LIKE ? DESC, wp_posts.post_date DESC
     LIMIT ?, ?; SELECT FOUND_ROWS() as count`, [search, search, search, search, start, length])
 }
