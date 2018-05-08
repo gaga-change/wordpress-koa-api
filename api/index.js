@@ -11,6 +11,7 @@ router
     .get('/posts/new', posts.getNewPosts) // 最新文章
     .get('/post', posts.getPost) // 获取指定文章
     .get('/posts/getArchives', posts.getArchives) // 按月归档
+    .get('/posts/search', posts.search) // 模糊搜索
 
     /**
      * 剩余需要接口
