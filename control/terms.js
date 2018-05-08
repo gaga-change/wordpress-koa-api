@@ -18,3 +18,7 @@ exports.getCategory = () => {
 exports.getPostsTerms = (idArr) => {
     return terms.getPostsTerms(idArr)
 }
+
+exports.getTermsByID = (id) => {
+    return terms.getTermsByID(id)
+}

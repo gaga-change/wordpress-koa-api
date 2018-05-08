@@ -34,3 +34,12 @@ exports.getPostsTerms = (idArr) => {
     AND tr.object_id IN (?)
     ORDER BY t.name ASC`, [idArr])
 }
+
+/** 根据 termId 搜索 */
+exports.getTermsByID = (id) => {
+    return query(`SELECT t.*, tt.*
+    FROM wp_terms AS t
+    INNER JOIN wp_term_taxonomy AS tt
+    ON t.term_id = tt.term_id
+    WHERE t.term_id = ?`, [id])
+}
