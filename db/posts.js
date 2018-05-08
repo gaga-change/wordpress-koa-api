@@ -9,17 +9,7 @@ exports.queryPosts = (start, length) => {
     AND (wp_posts.post_status = 'publish'
     OR wp_posts.post_status = 'private') 
     ORDER BY wp_posts.post_date DESC
-    LIMIT ?, ?`, [start, length])
-}
-
-/** 获取查询总数 */
-exports.findRows = () => {
-    return query(`SELECT COUNT(*) as count
-    FROM wp_posts 
-    WHERE 1=1 
-    AND wp_posts.post_type = 'post'
-    AND (wp_posts.post_status = 'publish'
-    OR wp_posts.post_status = 'private')` )
+    LIMIT ?, ?; SELECT FOUND_ROWS() as count`, [start, length])
 }
 
 /**

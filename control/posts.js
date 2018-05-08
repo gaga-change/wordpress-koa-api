@@ -5,7 +5,7 @@ const terms = require('./terms')
 exports.getPosts = async (start, length) => {
     // 获取列表文章ID
     let ret = await posts.queryPosts(start, length)
-    return listDetail(ret)
+    return listDetail(ret[0], ret[1])
 }
 
 /**
@@ -36,14 +36,13 @@ exports.search = (search) => {
     return posts.search(search)
 }
 
-async function listDetail(idObjArr) {
+async function listDetail(idObjArr, rowsArr) {
+    let rows = rowsArr[0] || { count: 0 }
     let idArr = [] // 文章ID数组
     idObjArr.forEach(item => idArr.push(item.ID)) // 转为数组
-    let rows = 0 // 文章总数
     let postArr = [] // 处理后的文章列表
     // 获取详情、标签、总数
-    ret = await Promise.all([posts.queryPostsByID(idArr), terms.getPostsTerms(idArr), posts.findRows()])
-    rows = ret[2][0] || { count: 0 }
+    ret = await Promise.all([posts.queryPostsByID(idArr), terms.getPostsTerms(idArr)])
     let obj = {}
     // 详情循环，裁剪处理
     ret[0].forEach(item => {
