@@ -15,11 +15,11 @@ exports.getPosts = async (ctx) => {
     
     ctx.body = {
         data: {
-            ...rows,
+            ...ret.rows,
             page,
             pageSize,
-            pages: Math.ceil(rows.count / pageSize),
-            list: postArr
+            pages: Math.ceil(ret.rows.count / pageSize),
+            list: ret.postArr
         }
     }
 }
