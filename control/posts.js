@@ -8,6 +8,12 @@ exports.getPosts = async (start, length) => {
     return listDetail(ret[0], ret[1])
 }
 
+/** 模糊搜索 */
+exports.search = async (search) => {
+    let ret = await posts.search(search)
+    return listDetail(ret[0], ret[1])
+}
+
 /**
  * 根据ID获取文章详情
  * @param {Array} idArr ID集合
@@ -29,11 +35,6 @@ exports.getNewPosts = () => {
 /** 按月份归档 */
 exports.getArchives = () => {
     return posts.getArchives()
-}
-
-/** 模糊搜索 */
-exports.search = (search) => {
-    return posts.search(search)
 }
 
 async function listDetail(idObjArr, rowsArr) {
